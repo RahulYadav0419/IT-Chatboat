@@ -1,0 +1,144 @@
+{
+  "_comment": "=================================================================",
+  "_comment2": "  ADMIN CONFIG — Edit this file to add or remove allowed software",
+  "_comment3": "  Each software entry has:",
+  "_comment4": "    display_name  : Name shown to users",
+  "_comment5": "    description   : Short description shown to users",
+  "_comment6": "    pre_install   : Commands to run BEFORE main install (optional)",
+  "_comment7": "    commands      : The main install commands (required)",
+  "_comment8": "    post_install  : Commands to run AFTER install (optional)",
+  "_comment9": "=================================================================",
+
+  "software": {
+
+    "nodejs": {
+      "display_name": "Node.js 20 (LTS)",
+      "description": "JavaScript runtime for web development",
+      "pre_install": [
+        "sudo apt-get update -y"
+      ],
+      "commands": [
+        "curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -",
+        "sudo apt-get install -y nodejs"
+      ],
+      "post_install": [
+        "node --version",
+        "npm --version"
+      ]
+    },
+
+    "docker": {
+      "display_name": "Docker",
+      "description": "Container platform for running applications",
+      "pre_install": [
+        "sudo apt-get update -y",
+        "sudo apt-get install -y ca-certificates curl gnupg"
+      ],
+      "commands": [
+        "sudo install -m 0755 -d /etc/apt/keyrings",
+        "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg",
+        "sudo chmod a+r /etc/apt/keyrings/docker.gpg",
+        "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo $VERSION_CODENAME) stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
+        "sudo apt-get update -y",
+        "sudo apt-get install -y docker-ce docker-ce-cli containerd.io"
+      ],
+      "post_install": [
+        "sudo systemctl enable docker",
+        "sudo systemctl start docker",
+        "docker --version"
+      ]
+    },
+
+    "git": {
+      "display_name": "Git",
+      "description": "Version control system",
+      "pre_install": [
+        "sudo apt-get update -y"
+      ],
+      "commands": [
+        "sudo apt-get install -y git"
+      ],
+      "post_install": [
+        "git --version"
+      ]
+    },
+
+    "python3": {
+      "display_name": "Python 3 + pip",
+      "description": "Python programming language with pip package manager",
+      "pre_install": [
+        "sudo apt-get update -y"
+      ],
+      "commands": [
+        "sudo apt-get install -y python3 python3-pip python3-venv"
+      ],
+      "post_install": [
+        "python3 --version",
+        "pip3 --version"
+      ]
+    },
+
+    "nginx": {
+      "display_name": "Nginx",
+      "description": "Web server and reverse proxy",
+      "pre_install": [
+        "sudo apt-get update -y"
+      ],
+      "commands": [
+        "sudo apt-get install -y nginx"
+      ],
+      "post_install": [
+        "sudo systemctl enable nginx",
+        "sudo systemctl start nginx",
+        "nginx -v"
+      ]
+    },
+
+    "mysql": {
+      "display_name": "MySQL Server",
+      "description": "Relational database server",
+      "pre_install": [
+        "sudo apt-get update -y"
+      ],
+      "commands": [
+        "sudo apt-get install -y mysql-server"
+      ],
+      "post_install": [
+        "sudo systemctl enable mysql",
+        "sudo systemctl start mysql",
+        "mysql --version"
+      ]
+    },
+
+    "vscode_server": {
+      "display_name": "VS Code Server (code-server)",
+      "description": "Visual Studio Code accessible from the browser",
+      "pre_install": [
+        "sudo apt-get update -y",
+        "sudo apt-get install -y curl"
+      ],
+      "commands": [
+       "sudo snap install code --classic"
+      ],
+      "post_install": [
+        "sudo systemctl enable code-server@$USER",
+        "sudo systemctl start code-server@$USER"
+      ]
+    },
+
+    "java": {
+      "display_name": "Java 17 (OpenJDK)",
+      "description": "Java Development Kit for running Java applications",
+      "pre_install": [
+        "sudo apt-get update -y"
+      ],
+      "commands": [
+        "sudo apt-get install -y openjdk-17-jdk"
+      ],
+      "post_install": [
+        "java -version"
+      ]
+    }
+
+  }
+}
