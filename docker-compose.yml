@@ -1,0 +1,10 @@
+version : "3.9"
+services:
+  chatbox:
+    build: .
+    container_name: chatbox_app
+    ports:
+      - "500:500"
+    volumes:
+      - .:/app
+    restart: always

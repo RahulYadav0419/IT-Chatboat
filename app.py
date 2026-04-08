@@ -617,7 +617,7 @@ HTML_PAGE = r"""<!DOCTYPE html>
 
     const label = document.createElement("div");
     label.className = "msg-label";
-    label.textContent = role === "bot" ? "🤖 IT Agent" : "👤 You";
+    label.textContent = role === "bot" ? "🤖 ITi Agent" : "👤 You";
     div.appendChild(label);
 
     const bubble = document.createElement("div");
